@@ -16,14 +16,21 @@ let getApiData = async () => {
   let apiData = await axios.get(
     `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`
   );
+
   let apiDog = apiData.data.map((el) => {
+
+    let temperaments = el.temperament?.toString().split(",")
+    let tempObj = []
+    temperaments?.map((el) => {
+      tempObj.push({"name": el.trim()})
+    })
     return {
       id: el.id,
       name: el.name,
       weight: el.weight.metric + " kg",
       height: el.height.metric + " cm",
       life_span: el.life_span,
-      temperament: el.temperament,
+      temperaments: tempObj,
       image: el.image.url,
     };
   });
@@ -113,7 +120,7 @@ router.post("/dog", async (req, res) => {
     minWeight,
     maxWeight,
     life_span,
-    temperaments,
+    temperament,
     image,
   } = req.body;
 
@@ -134,20 +141,20 @@ router.post("/dog", async (req, res) => {
   arrWeight.push(minW, maxW);
   let strW = arrWeight.join(" - ");
   let strWeight = strW + " kg";
-  
+
   try {
     let dogCreated = await Dog.create({
       name,
       height: strHeight,
       weight: strWeight,
-      life_span,
+      life_span: life_span + " years",
       image: image
         ? image
         : "https://nupec.com/wp-content/uploads/2020/07/Captura-de-pantalla-2020-07-24-a-las-17.33.44.png",
     });
 
     const ListTemperaments = await Temperament.findAll({
-      where: { name: temperaments },
+      where: { name: temperament },
     });
 
     dogCreated.addTemperament(ListTemperaments);
