@@ -6,7 +6,6 @@ import { Link, useParams } from "react-router-dom";
 export function DogDetail(props) {
   let dispatch = useDispatch();
   let { id } = useParams();
-  console.log(id);
   let detail = useSelector((state) => state.dogDetail);
 
   useEffect(() => {
