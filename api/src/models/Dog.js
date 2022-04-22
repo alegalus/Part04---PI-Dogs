@@ -28,6 +28,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      dogDbCreated: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      apiDog: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       image: {
         type: DataTypes.STRING(10000),
       },

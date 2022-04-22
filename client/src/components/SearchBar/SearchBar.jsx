@@ -8,7 +8,6 @@ export function SearchBar() {
   const dispatch = useDispatch();
 
   function handleChange(e) {
-    e.preventDefault();
     setSearch(e.target.value);
   }
 

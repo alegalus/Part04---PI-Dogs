@@ -18,12 +18,11 @@ let getApiData = async () => {
   );
 
   let apiDog = apiData.data.map((el) => {
-
-    let temperaments = el.temperament?.toString().split(",")
-    let tempObj = []
+    let temperaments = el.temperament?.toString().split(",");
+    let tempObj = [];
     temperaments?.map((el) => {
-      tempObj.push({"name": el.trim()})
-    })
+      tempObj.push({ name: el.trim() });
+    });
     return {
       id: el.id,
       name: el.name,
@@ -32,6 +31,8 @@ let getApiData = async () => {
       life_span: el.life_span,
       temperaments: tempObj,
       image: el.image.url,
+      apiDog: true,
+      dogDbCreated: false
     };
   });
 
