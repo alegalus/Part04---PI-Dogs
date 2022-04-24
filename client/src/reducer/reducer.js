@@ -86,15 +86,19 @@ function rootReducer(state = initialState, action) {
  
 
   case FILTER_BY_TEMPERAMENT: {
-    let dogs = state.allDogs
+  
    if(action.payload === "all"){
      return {...state, filterDogs: []}
-    }else{
-        for (let i = 0; i < dogs.length; i++) {
-          let dogsFound = dogs[i].temperaments.filter((t) => t.name === action.payload)
-          return {...state, filterDogs: dogsFound}
-        }
-      }
+    }
+    let dogsFound = state.allDogs?.filter((dog) => {
+         for (const temp of dog.temperaments) {
+              if(temp.name === action.payload){
+                return dog
+          }
+         }
+       }) 
+      return {...state, filterDogs: dogsFound}
+
     }
     default:
       return state;

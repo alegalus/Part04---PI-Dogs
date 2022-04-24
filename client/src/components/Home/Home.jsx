@@ -10,23 +10,36 @@ import {
 } from "../../actions/action";
 import { DogCard } from "./DogCard";
 import { SearchBar } from "../SearchBar/SearchBar";
+import { Pagination } from "../Pagination/Pagination";
 
 export function Home() {
   let dispatch = useDispatch();
   let dogs = useSelector((state) => state.allDogs);
   let temp = useSelector((state) => state.allTemperaments);
   let filterDogs = useSelector((state) => state.filterDogs);
+  let [currentPage, setCurrentPage] = useState(1);
+  let [dogsPerPage, /*setDogsPerPage*/] = useState(8);
+
   const [, /*order*/ setOrder] = useState("");
   const [, /*weight*/ setWeight] = useState("");
   const [, /*temp*/ setTemp] = useState("");
-  const [, /*temp*/ setOrigin] = useState("");
+  const [, /*origin*/ setOrigin] = useState("");
 
   useEffect(() => {
     dispatch(getAllDogs());
     dispatch(getAllTemperaments());
   }, [dispatch]);
 
-  function reloadSubmit(e) {
+  let indexLastDog = currentPage * dogsPerPage;
+  let indexFirstDog = indexLastDog - dogsPerPage;
+  let currentDog = dogs.slice(indexFirstDog, indexLastDog);
+  let currentFilterDog = filterDogs.slice(indexFirstDog, indexLastDog);
+
+  let paginate = (pageNumbers) => {
+    setCurrentPage(pageNumbers);
+  };
+
+  function reloadSubmit() {
     dispatch(getAllDogs());
   }
 
@@ -92,12 +105,11 @@ export function Home() {
         <button type="submit">Reload Dogs</button>
       </form>
 
-      {
-      filterDogs.length === 0 ? (
+      {filterDogs.length === 0 ? (
         dogs.length === 0 ? (
           <h3>Searching...</h3>
         ) : (
-          dogs.map((dog) => (
+          currentDog.map((dog) => (
             <DogCard
               id={dog.id}
               key={dog.id}
@@ -109,7 +121,7 @@ export function Home() {
           ))
         )
       ) : (
-        filterDogs.map((dog) => (
+        currentFilterDog.map((dog) => (
           <DogCard
             id={dog.id}
             key={dog.id}
@@ -119,6 +131,19 @@ export function Home() {
             weight={dog.weight}
           />
         ))
+      )}
+      {filterDogs.length === 0 ? (
+        <Pagination
+          dogsPerPage={dogsPerPage}
+          totalDogs={dogs.length}
+          paginate={paginate}
+        />
+      ) : (
+        <Pagination
+          dogsPerPage={dogsPerPage}
+          totalDogs={filterDogs.length}
+          paginate={paginate}
+        />
       )}
     </div>
   );

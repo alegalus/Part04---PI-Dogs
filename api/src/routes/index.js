@@ -23,10 +23,11 @@ let getApiData = async () => {
     temperaments?.map((el) => {
       tempObj.push({ name: el.trim() });
     });
+    
     return {
       id: el.id,
       name: el.name,
-      weight: el.weight.metric + " kg",
+      weight: el.weight.metric.includes('NaN') ? '20 kg' : el.weight.metric + " kg",
       height: el.height.metric + " cm",
       life_span: el.life_span,
       temperaments: tempObj,
