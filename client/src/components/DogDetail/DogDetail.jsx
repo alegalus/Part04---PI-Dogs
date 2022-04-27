@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearDetail, getDogDetail } from "../../actions/action";
-import { Link, useParams } from "react-router-dom";
+import { clearDetail, deleteDog, getDogDetail } from "../../actions/action";
+import { useHistory, useParams } from "react-router-dom";
+import { Nav } from "../Nav/Nav";
 
 export function DogDetail(props) {
   let dispatch = useDispatch();
   let { id } = useParams();
   let detail = useSelector((state) => state.dogDetail);
+  let history = useHistory()
+
 
   useEffect(() => {
     dispatch(getDogDetail(id));
+    
+   
   }, []);
 
   useEffect(() => {
@@ -17,6 +22,12 @@ export function DogDetail(props) {
       dispatch(clearDetail());
     };
   }, []);
+
+  let handleDelete = () => {
+    dispatch(deleteDog(id))
+    alert("¡¡The dog was deleted");
+    history.push("/home")
+  }
 
   let arrTemp = [];
   detail.temperaments?.forEach((temp) => {
@@ -31,15 +42,15 @@ export function DogDetail(props) {
         <h3>cargando...</h3>
       ) : (
         <div>
-          <Link to={"/home"}>
-            <h1>home</h1>
-          </Link>
+          <Nav/>
           <img src={detail.image} alt={detail.name} />
           <h2>{detail.name}</h2>
           <p>{tempStr}</p>
           <p>Weight: {detail.weight}</p>
           <p>Height: {detail.height}</p>
           <p>Life Span: {detail.life_span}</p>
+          {id.length <= 3 ? null : <button onClick={handleDelete}>Delete Dog</button>}
+          
         </div>
       )}
     </>

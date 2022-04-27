@@ -8,6 +8,8 @@ import {
   ORDER_BY_WEIGHT,
   FILTER_BY_TEMPERAMENT,
   FILTER_BY_ORIGIN,
+  CREATE_DOG,
+  DELETE_DOG,
 } from "../actions/action";
 
 const initialState = {
@@ -37,8 +39,9 @@ function rootReducer(state = initialState, action) {
     }
 
     case GET_ALL_TEMPERAMENTS: {
-      return {...state, allTemperaments: action.payload}
+      return {...state, allTemperaments: action.payload};
     }
+    
 
     case ORDER_BY_NAME: {
       let sortName = action.payload === "A-Z"
@@ -84,7 +87,6 @@ function rootReducer(state = initialState, action) {
     }
   }
  
-
   case FILTER_BY_TEMPERAMENT: {
   
    if(action.payload === "all"){
@@ -100,6 +102,13 @@ function rootReducer(state = initialState, action) {
       return {...state, filterDogs: dogsFound}
 
     }
+    case CREATE_DOG: {
+      return {...state}
+    }
+    case DELETE_DOG: {
+      return { ...state};
+    }
+
     default:
       return state;
   }

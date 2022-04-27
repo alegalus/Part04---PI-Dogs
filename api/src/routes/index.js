@@ -23,17 +23,19 @@ let getApiData = async () => {
     temperaments?.map((el) => {
       tempObj.push({ name: el.trim() });
     });
-    
+
     return {
       id: el.id,
       name: el.name,
-      weight: el.weight.metric.includes('NaN') ? '20 kg' : el.weight.metric + " kg",
+      weight: el.weight.metric.includes("NaN")
+        ? "20 kg"
+        : el.weight.metric + " kg",
       height: el.height.metric + " cm",
       life_span: el.life_span,
       temperaments: tempObj,
       image: el.image.url,
       apiDog: true,
-      dogDbCreated: false
+      dogDbCreated: false,
     };
   });
 
@@ -163,7 +165,21 @@ router.post("/dog", async (req, res) => {
 
     res.status(201).send("dog created successfully");
   } catch (error) {
-    console.log(error);
+    res.send(error);
+  }
+});
+
+router.delete("/dogs/:idRaza", async (req, res) => {
+  try {
+    let { idRaza } = req.params;
+    await Dog.destroy({
+      where: {
+        id: idRaza,
+      },
+    });
+    return res.sendStatus(204);
+  } catch (error) {
+    res.send(error);
   }
 });
 

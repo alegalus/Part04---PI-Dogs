@@ -1,0 +1,15 @@
+#dogForm {
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#dogForm input:focus{
+    outline: none;
+}
+
+
+.danger{
+    color:red;
+}

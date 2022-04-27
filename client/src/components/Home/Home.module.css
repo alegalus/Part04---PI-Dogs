@@ -1,0 +1,50 @@
+#form {
+  display: flex;
+}
+
+.formLink {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 1.5em;
+  border: 2px rgb(0, 0, 0) solid;
+  padding: 0.3em 0.4em;
+  border-radius: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+  transition: all 1s;
+}
+.formLink:hover {
+  transform: scale(1.04, 1.04);
+  border-color: #2798f5;
+  color: #2798f5;
+}
+
+#search {
+  display: flex;
+  justify-content: center;
+}
+
+#filters{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 1em;
+}
+
+#reload {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+  }
+
+#dogCardPos{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0em 1.5em;
+  gap: 1.5em;
+}

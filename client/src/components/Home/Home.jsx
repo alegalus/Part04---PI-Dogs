@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   getAllDogs,
   orderByName,
@@ -11,6 +12,8 @@ import {
 import { DogCard } from "./DogCard";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { Pagination } from "../Pagination/Pagination";
+import { Nav } from "../Nav/Nav";
+import s from "./Home.module.css";
 
 export function Home() {
   let dispatch = useDispatch();
@@ -18,7 +21,7 @@ export function Home() {
   let temp = useSelector((state) => state.allTemperaments);
   let filterDogs = useSelector((state) => state.filterDogs);
   let [currentPage, setCurrentPage] = useState(1);
-  let [dogsPerPage, /*setDogsPerPage*/] = useState(8);
+  let [dogsPerPage /*setDogsPerPage*/] = useState(8);
 
   const [, /*order*/ setOrder] = useState("");
   const [, /*weight*/ setWeight] = useState("");
@@ -65,51 +68,75 @@ export function Home() {
 
   return (
     <div>
-      <h1>Dog App</h1>
-      <SearchBar />
       <div>
-        <div id="byName">
-          <select name="Order By Name" onChange={handleOrderByName}>
-            <option>Order By Name</option>
-            <option value="A-Z">A-Z</option>
-            <option value="Z-A">Z-A</option>
-          </select>
+        <div>
+          <Nav />
         </div>
-        <div id="byweight">
-          <select name="Order By Weight" onChange={handleOrderByWeight}>
-            <option>Order By Weight</option>
-            <option value="Min to Max">Min to Max</option>
-            <option value="Max to Min">Max to Min</option>
-          </select>
+        <div id={s.form}>
+          <Link className={s.formLink} to={"/Formdog"}>
+            ADD DOG
+          </Link>
         </div>
-        <div id="byTemperaments">
-          <select name="" id="" onChange={handleFilterByTemp}>
-            <option value="all">Temperament</option>
-            {temp?.map((t) => (
-              <option value={t.name} key={t.id}>
-                {t.name}
-              </option>
-            ))}
-          </select>
+        <div id={s.search}>
+          <SearchBar />
         </div>
-        <div id="dogCreated">
-          <select name="" id="" onChange={handleFilterByOrigin}>
-            <option value="all">Dog Origin</option>
-            <option value="Api Dog">Api Dog</option>
-            <option value="Data Base Dog">Data Base Dog</option>
-          </select>
+
+        <div id={s.filters}>
+          <div id="byName">
+            <select name="Order By Name" onChange={handleOrderByName}>
+              <option>Order By Name</option>
+              <option value="A-Z">A-Z</option>
+              <option value="Z-A">Z-A</option>
+            </select>
+          </div>
+          <div id="byweight">
+            <select name="Order By Weight" onChange={handleOrderByWeight}>
+              <option>Order By Weight</option>
+              <option value="Min to Max">Min to Max</option>
+              <option value="Max to Min">Max to Min</option>
+            </select>
+          </div>
+          <div id="byTemperaments">
+            <select name="" id="" onChange={handleFilterByTemp}>
+              <option value="all">Temperament</option>
+              {temp?.map((t) => (
+                <option value={t.name} key={t.id}>
+                  {t.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div id="dogCreated">
+            <select name="" id="" onChange={handleFilterByOrigin}>
+              <option value="all">Dog Origin</option>
+              <option value="Api Dog">Api Dog</option>
+              <option value="Data Base Dog">Data Base Dog</option>
+            </select>
+          </div>
         </div>
+
+        <form id={s.reload} onSubmit={reloadSubmit}>
+          <button type="submit">Reload Dogs</button>
+        </form>
       </div>
-
-      <form onSubmit={reloadSubmit}>
-        <button type="submit">Reload Dogs</button>
-      </form>
-
-      {filterDogs.length === 0 ? (
-        dogs.length === 0 ? (
-          <h3>Searching...</h3>
+      <div id={s.dogCardPos}>
+        {filterDogs.length === 0 ? (
+          dogs.length === 0 ? (
+            <h3>Searching...</h3>
+          ) : (
+            currentDog.map((dog) => (
+              <DogCard
+                id={dog.id}
+                key={dog.id}
+                image={dog.image}
+                name={dog.name}
+                temperaments={dog.temperaments}
+                weight={dog.weight}
+              />
+            ))
+          )
         ) : (
-          currentDog.map((dog) => (
+          currentFilterDog.map((dog) => (
             <DogCard
               id={dog.id}
               key={dog.id}
@@ -119,32 +146,23 @@ export function Home() {
               weight={dog.weight}
             />
           ))
-        )
-      ) : (
-        currentFilterDog.map((dog) => (
-          <DogCard
-            id={dog.id}
-            key={dog.id}
-            image={dog.image}
-            name={dog.name}
-            temperaments={dog.temperaments}
-            weight={dog.weight}
+        )}
+      </div>
+      <div id={s.pagination}>
+        {filterDogs.length === 0 ? (
+          <Pagination
+            dogsPerPage={dogsPerPage}
+            totalDogs={dogs.length}
+            paginate={paginate}
           />
-        ))
-      )}
-      {filterDogs.length === 0 ? (
-        <Pagination
-          dogsPerPage={dogsPerPage}
-          totalDogs={dogs.length}
-          paginate={paginate}
-        />
-      ) : (
-        <Pagination
-          dogsPerPage={dogsPerPage}
-          totalDogs={filterDogs.length}
-          paginate={paginate}
-        />
-      )}
+        ) : (
+          <Pagination
+            dogsPerPage={dogsPerPage}
+            totalDogs={filterDogs.length}
+            paginate={paginate}
+          />
+        )}
+      </div>
     </div>
   );
 }

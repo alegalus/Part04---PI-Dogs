@@ -8,7 +8,7 @@ export function Pagination(props) {
   }
 
   return (
-    <nav>
+    
       <ul id={s.pageNum}>
         {pageNumbers.map((num) => (
           <li id={s.pageLi} key={num}>
@@ -16,6 +16,6 @@ export function Pagination(props) {
           </li>
         ))}
       </ul>
-    </nav>
+    
   );
 }

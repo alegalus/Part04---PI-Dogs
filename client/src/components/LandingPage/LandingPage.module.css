@@ -1,14 +1,14 @@
 #welcome {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 2em;
-  border: 2px white solid;
+  border: 2.5px rgb(0, 0, 0) solid;
   padding: 0.3em 0.4em;
   border-radius: 30px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
   position: absolute;
-  right: 350px;
+  right: 300px;
   top: 220px;
   transition: all 1s;
 }
@@ -21,9 +21,9 @@
 
 #image {
   min-height: 100vh;
-  background: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0W0aaRufeP2yXXSzVVPjL7pW49e6DMbaWtpnL0ZgLdmbA50391AXRg9VNa-P0cpyyHW30l2s-eRkw4Ria2VgviZZNZ_Fc6U4iccVNxzg38MXWRXBUUN1TeedBNJiplICTQ4REvuy-G35gNv7scVWAB_GUzpl52THgZ_gU_LAGLiX33gaZDitSzk4H/s1600/dogLanding.jpg");
+  background: url("https://i.ibb.co/48XWzH8/french-bulldog-young-dog-posing.jpg");
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   background-color: black;
   background-repeat: no-repeat;
 }
