@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch} from "react-redux";
 import { searchDog } from "../../actions/action";
+import s from"./SearchBar.module.css"
 
 
 export function SearchBar() {
@@ -18,8 +19,8 @@ export function SearchBar() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div >
+      <form id={s.search} onSubmit={handleSubmit}>
         <input
           value={search}
           type="search"

@@ -67,14 +67,14 @@ export function Home() {
   };
 
   return (
-    <div>
+    <div id={s.main}>
       <div>
         <div>
           <Nav />
         </div>
         <div id={s.form}>
           <Link className={s.formLink} to={"/Formdog"}>
-            ADD DOG
+            Create Dog
           </Link>
         </div>
         <div id={s.search}>
@@ -116,7 +116,7 @@ export function Home() {
         </div>
 
         <form id={s.reload} onSubmit={reloadSubmit}>
-          <button type="submit">Reload Dogs</button>
+          <button type="submit">Reload</button>
         </form>
       </div>
       <div id={s.dogCardPos}>

@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 
 
 export function Nav() {
+    
     return(
         <nav id={s.navigator}>
-            <Link to={"/home"}>
-                <button>HOME</button>
+            <Link id={s.home} to={"/home"}>
+              HOME
             </Link>
         </nav>
 

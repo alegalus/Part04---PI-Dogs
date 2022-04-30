@@ -13,9 +13,7 @@ export function DogCard(props) {
   return (
     <div className={s.card} key={props.id}>
       <Link to={"detail/" + props.id}>
-        <div className={s.imageContainer}>
         <img id={s.imagen} src={props.image} alt={props.name} />
-        </div>
       </Link>
       <h2>{props.name}</h2>
       <p>{tempStr}</p>
