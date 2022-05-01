@@ -3,11 +3,11 @@ import { createDog, getAllTemperaments } from "../../actions/action";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./FormDog.module.css";
 import { Nav } from "../Nav/Nav";
+import { Footer } from "../Footer/Footer";
 
 export function FormDog() {
   let temp = useSelector((state) => state.allTemperaments);
   let dispatch = useDispatch();
-
 
   let [input, setInput] = useState({
     name: "",
@@ -106,15 +106,17 @@ export function FormDog() {
       image: "",
       temperament: [],
     });
-  
   };
 
   return (
     <div>
       <Nav />
+      <h2 id={s.title}>Create your dog</h2>
+      <p id={s.text}>Complete the data to create your own race</p>
       <form onSubmit={handleSubmit} id={s.dogForm}>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">Name:</label>
         <input
+          required
           autoComplete="off"
           onChange={handleInputChange}
           value={input.name}
@@ -123,59 +125,59 @@ export function FormDog() {
           id=""
         />
         {!errors.name ? null : <p className={s.danger}>{errors.name}</p>}
-        <label htmlFor="minHeight">Min height</label>
-        <input
-          autoComplete="off"
-          placeholder="Put the value in cm"
-          onChange={handleInputChange}
-          value={input.minHeight}
-          type="text"
-          name="minHeight"
-          id=""
-        />
-        {!errors.minHeight ? null : (
-          <p className={s.danger}>{errors.minHeight}</p>
-        )}
-        <label htmlFor="maxHeight">Max height</label>
-        <input
-          autoComplete="off"
-          placeholder="Put the value in cm"
-          onChange={handleInputChange}
-          value={input.maxHeight}
-          type="text"
-          name="maxHeight"
-          id=""
-        />
-        {!errors.maxHeight ? null : (
-          <p className={s.danger}>{errors.maxHeight}</p>
-        )}
-        <label htmlFor="minWeight">Min weight</label>
-        <input
-          autoComplete="off"
-          placeholder="Put the value in kg"
-          onChange={handleInputChange}
-          value={input.minWeight}
-          type="text"
-          name="minWeight"
-          id=""
-        />
-        {!errors.minWeight ? null : (
-          <p className={s.danger}>{errors.minWeight}</p>
-        )}
-        <label htmlFor="maxWeight">Max weight</label>
-        <input
-          autoComplete="off"
-          placeholder="Put the value in kg"
-          onChange={handleInputChange}
-          value={input.maxWeight}
-          type="text"
-          name="maxWeight"
-          id=""
-        />
-        {!errors.maxWeight ? null : (
-          <p className={s.danger}>{errors.maxWeight}</p>
-        )}
-        <label htmlFor="life_span">Life Span</label>
+          <label htmlFor="minHeight">Min height:</label>
+          <input
+            required
+            autoComplete="off"
+            onChange={handleInputChange}
+            value={input.minHeight}
+            type="number"
+            name="minHeight"
+            id=""
+          />
+          {!errors.minHeight ? null : (
+            <p className={s.danger}>{errors.minHeight}</p>
+          )}
+          <label htmlFor="maxHeight">Max height:</label>
+          <input
+            required
+            autoComplete="off"
+            onChange={handleInputChange}
+            value={input.maxHeight}
+            type="number"
+            name="maxHeight"
+            id=""
+          />
+          {!errors.maxHeight ? null : (
+            <p className={s.danger}>{errors.maxHeight}</p>
+          )}
+          <label htmlFor="minWeight">Min weight:</label>
+          <input
+            required
+            autoComplete="off"
+            onChange={handleInputChange}
+            value={input.minWeight}
+            type="number"
+            name="minWeight"
+            id=""
+          />
+          {!errors.minWeight ? null : (
+            <p className={s.danger}>{errors.minWeight}</p>
+          )}
+          <label htmlFor="maxWeight">Max weight:</label>
+          <input
+            required
+            autoComplete="off"
+            onChange={handleInputChange}
+            value={input.maxWeight}
+            type="number"
+            name="maxWeight"
+            id=""
+          />
+          {!errors.maxWeight ? null : (
+            <p className={s.danger}>{errors.maxWeight}</p>
+          )}
+        <label htmlFor="life_span">Life Span:</label>
         <input
           autoComplete="off"
           placeholder="Example 10 - 12"
@@ -188,7 +190,7 @@ export function FormDog() {
         {!errors.life_span ? null : (
           <p className={s.danger}>{errors.life_span}</p>
         )}
-        <label htmlFor="image">Image</label>
+        <label htmlFor="image">Image:</label>
         <input
           autoComplete="off"
           placeholder="Paste the url of the image"
@@ -198,9 +200,9 @@ export function FormDog() {
           name="image"
           id=""
         />
-        <label htmlFor="temperament">Temperament</label>
-        <p>*If you wanna select multiple temperaments, hold ctrl + click</p>
-        <select onChange={handleSelect} name="temperament" id="" size={10}>
+        <label htmlFor="temperament">Temperament:</label>
+        <select onChange={handleSelect} name="temperament" id="" size={0}>
+          <option className={s.optionOne}>Select the options</option>
           {temp?.map((t) => (
             <option key={t.id} value={t.name}>
               {t.name}
@@ -212,17 +214,18 @@ export function FormDog() {
           {input.temperament.length === 0
             ? null
             : input.temperament?.map((el) => (
-                <div key={el}>
+                <div id={s.temp} key={el}>
                   <span>{el}</span>
                   <div>
-                    <button onClick={() => handleDeleteTemp(el)}>x</button>
+                    <button id={s.deleteButton} onClick={() => handleDeleteTemp(el)}>x</button>
                   </div>
                 </div>
               ))}
         </div>
         <br />
-        <button type="submit">Create</button>
+        <button id={s.createButton} type="submit">Create</button>
       </form>
+      <div><Footer/></div>
     </div>
   );
 }

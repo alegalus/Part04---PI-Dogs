@@ -13,15 +13,16 @@ import { DogCard } from "./DogCard";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { Pagination } from "../Pagination/Pagination";
 import { Nav } from "../Nav/Nav";
+import { Footer } from "../Footer/Footer";
 import s from "./Home.module.css";
 
 export function Home() {
   let dispatch = useDispatch();
   let dogs = useSelector((state) => state.allDogs);
   let temp = useSelector((state) => state.allTemperaments);
-  let filterDogs = useSelector((state) => state.filterDogs);
   let [currentPage, setCurrentPage] = useState(1);
   let [dogsPerPage /*setDogsPerPage*/] = useState(8);
+
 
   const [, /*order*/ setOrder] = useState("");
   const [, /*weight*/ setWeight] = useState("");
@@ -30,13 +31,12 @@ export function Home() {
 
   useEffect(() => {
     dispatch(getAllDogs());
-    dispatch(getAllTemperaments());
-  }, [dispatch]);
+    dispatch(getAllTemperaments())
+  }, []);
 
   let indexLastDog = currentPage * dogsPerPage;
   let indexFirstDog = indexLastDog - dogsPerPage;
   let currentDog = dogs.slice(indexFirstDog, indexLastDog);
-  let currentFilterDog = filterDogs.slice(indexFirstDog, indexLastDog);
 
   let paginate = (pageNumbers) => {
     setCurrentPage(pageNumbers);
@@ -120,23 +120,11 @@ export function Home() {
         </form>
       </div>
       <div id={s.dogCardPos}>
-        {filterDogs.length === 0 ? (
-          dogs.length === 0 ? (
-            <h3>Searching...</h3>
-          ) : (
-            currentDog.map((dog) => (
-              <DogCard
-                id={dog.id}
-                key={dog.id}
-                image={dog.image}
-                name={dog.name}
-                temperaments={dog.temperaments}
-                weight={dog.weight}
-              />
-            ))
-          )
+        {
+        dogs.length === 0 ? (
+          <h3>Dogs not found</h3>
         ) : (
-          currentFilterDog.map((dog) => (
+          currentDog.map((dog) => (
             <DogCard
               id={dog.id}
               key={dog.id}
@@ -149,20 +137,17 @@ export function Home() {
         )}
       </div>
       <div id={s.pagination}>
-        {filterDogs.length === 0 ? (
-          <Pagination
-            dogsPerPage={dogsPerPage}
-            totalDogs={dogs.length}
-            paginate={paginate}
-          />
-        ) : (
-          <Pagination
-            dogsPerPage={dogsPerPage}
-            totalDogs={filterDogs.length}
-            paginate={paginate}
-          />
-        )}
+        <Pagination
+          dogsPerPage={dogsPerPage}
+          totalDogs={dogs.length}
+          paginate={paginate}
+        />
       </div>
+      {dogs.length === 0 ? null : (
+        <div>
+          <Footer />
+        </div>
+      )}
     </div>
   );
 }

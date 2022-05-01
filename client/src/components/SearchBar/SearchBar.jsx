@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { searchDog } from "../../actions/action";
-import s from"./SearchBar.module.css"
-
+import s from "./SearchBar.module.css";
 
 export function SearchBar() {
   const [search, setSearch] = useState("");
@@ -19,9 +18,10 @@ export function SearchBar() {
   }
 
   return (
-    <div >
+    <div>
       <form id={s.search} onSubmit={handleSubmit}>
         <input
+          required
           value={search}
           type="search"
           onChange={handleChange}
@@ -30,6 +30,7 @@ export function SearchBar() {
 
         <button type="submit">Search</button>
       </form>
+      <div></div>
     </div>
   );
 }

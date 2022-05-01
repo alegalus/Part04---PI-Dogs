@@ -14,16 +14,15 @@ import {
 
 const initialState = {
   allDogs: [],
+  dogs:[],
   dogDetail: {},
   allTemperaments: [],
-  filterDogs: [],
- 
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_DOGS: {
-      return { ...state, allDogs: action.payload };
+      return { ...state, allDogs: action.payload , dogs: action.payload};
     }
 
     case SEARCH_DOG: {
@@ -73,25 +72,18 @@ function rootReducer(state = initialState, action) {
     return { ...state, allDogs: sortWeight }
   }
   case FILTER_BY_ORIGIN: {
-    if(action.payload === "all") {
-      return {...state, filterDogs: []}
-    }
-
     if(action.payload ==="Api Dog" ) {
       let api = state.allDogs?.filter((el) => el.apiDog === true )
-      return {...state, filterDogs: api}
+      return {...state, allDogs: api}
     }
     if(action.payload === "Data Base Dog"){
      let db = state.allDogs?.filter((el) => el.dogDbCreated === true )
-    return {...state, filterDogs: db}
+    return {...state, allDogs: db}
     }
   }
  
   case FILTER_BY_TEMPERAMENT: {
   
-   if(action.payload === "all"){
-     return {...state, filterDogs: []}
-    }
     let dogsFound = state.allDogs?.filter((dog) => {
          for (const temp of dog.temperaments) {
               if(temp.name === action.payload){
@@ -99,7 +91,7 @@ function rootReducer(state = initialState, action) {
           }
          }
        }) 
-      return {...state, filterDogs: dogsFound}
+      return {...state, allDogs: dogsFound}
 
     }
     case CREATE_DOG: {

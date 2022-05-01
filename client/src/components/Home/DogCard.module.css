@@ -16,8 +16,15 @@
   
 }
 
+.temp{
+  width: 90%;
+  margin-top: -0.4em;
+}
+
 .card h2 {
+  width: 90%;
   font-weight: bold;
+  text-align: center;
 }
 
 .card:hover{
@@ -30,5 +37,5 @@
 #imagen {
   width: 340px;
   height:300px;
-  object-fit: cover;
+  object-fit:cover;
 }

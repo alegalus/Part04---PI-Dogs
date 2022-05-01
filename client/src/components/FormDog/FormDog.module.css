@@ -1,15 +1,95 @@
+#title {
+  text-align: center;
+  font-weight: bold;
+  color: #0a9396;
+}
+
+#text {
+  text-align: center;
+  margin-bottom: 2em;
+  font-weight: bold;
+}
+
+::placeholder {
+  color: gray;
+}
+
 #dogForm {
-    width: 30%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
+  width: 40%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-#dogForm input:focus{
-    outline: none;
+#dogForm input:focus {
+  outline: none;
 }
 
+#dogForm input {
+  width: 65%;
+  margin: auto;
+  border-bottom: 1px solid black;
+  border-radius: 4px;
+  text-align: center;
+}
 
-.danger{
-    color:red;
+#dogForm select {
+  width: 65%;
+  margin: auto;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 4px;
+}
+
+.optionOne {
+  color: gray;
+}
+
+#dogForm label {
+  margin: 1em 0em 0em 7em;
+  color: #0a9396;
+  font-weight: bold;
+}
+
+.danger {
+  color: red;
+  text-align: center;
+}
+
+#createButton {
+  width: 55%;
+  height: 1.8em;
+  margin: auto;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid rgb(177, 177, 177);
+  margin-bottom: 1.5em;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: white;
+  background: #00d2ff;
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);
+  background: linear-gradient(to right, #3a7bd5, #00d2ff);
+  transition: all 1s;
+}
+
+#createButton:hover{
+    transform: scale(1.03, 1.03);
+    border: 2px solid rgb(85, 84, 84);
+}
+
+#temp{
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+}
+
+#deleteButton {
+  margin: auto;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid rgb(177, 177, 177);
+  font-weight: 700;
+  color: white;
+  background: #001219;
 }

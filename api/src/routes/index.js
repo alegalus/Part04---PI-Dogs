@@ -82,9 +82,9 @@ router.get("/dogs", async (req, res) => {
     let filterByName = data.filter((el) =>
       el.name.toLowerCase().includes(name.toLowerCase())
     );
-    data.length
-      ? res.send(filterByName)
-      : res.status(404).send("dog not found");
+    data.length === 0
+      ? res.status(404).json({message:"dog not found"})
+      : res.send(filterByName)
   } else {
     res.send(data);
   }
