@@ -122,7 +122,11 @@ export function Home() {
       <div id={s.dogCardPos}>
         {
         dogs.length === 0 ? (
+          <div id={s.notFound}>
+          <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas" ></img>
           <h3>Dogs not found</h3>
+          <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas" ></img>
+          </div>
         ) : (
           currentDog.map((dog) => (
             <DogCard

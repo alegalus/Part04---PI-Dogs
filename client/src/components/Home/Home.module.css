@@ -88,3 +88,27 @@
   border-color: #bb3e03;
   color: #bb3e03;
 }
+
+#notFound{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding: 0.8em 0em;
+  border: 2px solid gray;
+  border-radius: 10px;
+  box-shadow: 8px 8px 20px gray;
+  width: 22%;
+
+}
+
+#notFound img{
+  width: 10%;
+}
+
+
+#notFound h3{
+  font-size: 1.5em;
+  color: #AE2012;
+}

@@ -25,7 +25,7 @@ export function SearchBar() {
           value={search}
           type="search"
           onChange={handleChange}
-          placeholder="Search by race"
+          placeholder="Search by breeds"
         />
 
         <button type="submit">Search</button>
