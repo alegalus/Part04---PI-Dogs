@@ -2,6 +2,7 @@ export const GET_ALL_DOGS = "GET_ALL_DOGS";
 export const SEARCH_DOG = "SEARCH_DOG";
 export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
+export const CLEAR_ALL_DOG = "CLEAR_ALL_DOG";
 export const GET_ALL_TEMPERAMENTS = "GET_ALL_TEMPERAMENTS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
@@ -9,6 +10,7 @@ export const FILTER_BY_TEMPERAMENT = "FILTER_BY_TEMPERAMENT";
 export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
 export const CREATE_DOG = "CREATE_DOG";
 export const DELETE_DOG = "DELETE_DOG";
+export const UPDATE_DOG = "UPDATE_DOG";
 const axios = require("axios").default;
 
 export function getAllDogs() {
@@ -53,6 +55,9 @@ export function getAllTemperaments() {
 export function clearDetail() {
   return { type: CLEAR_DETAIL };
 }
+export function clearAllDogs() {
+  return { type: CLEAR_ALL_DOG };
+}
 export function orderByName(payload) {
   return { type: ORDER_BY_NAME, payload };
 }
@@ -73,7 +78,6 @@ export function createDog(payload) {
       let create = await axios.post("http://localhost:3001/dog", payload);
       return dispatch({
         type: CREATE_DOG,
-        payload: create
       });
     };
   }
@@ -82,6 +86,15 @@ export function createDog(payload) {
       let json = await axios.delete("http://localhost:3001/dogs/" + id);
       return dispatch({
         type: DELETE_DOG,
+      });
+    };
+  }
+
+  export function updateDog(id, payload) {
+    return async function (dispatch) {
+      let update = await axios.put("http://localhost:3001/dogs/" + id, payload);
+      return dispatch({
+        type: UPDATE_DOG,
       });
     };
   }

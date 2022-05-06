@@ -26,7 +26,7 @@ export function FormDog() {
   let [errors, setErrors] = useState({});
 
   useEffect(() => {
-    dispatch(getAllTemperaments());
+    dispatch(getAllTemperaments()); 
   }, [dispatch]);
 
   function validate(input) {
@@ -112,10 +112,10 @@ export function FormDog() {
   };
 
   return (
-    <div>
+    <div className={s.mainForm}>
       <Nav />
       <h2 id={s.title}>Create your dog</h2>
-      <p id={s.text}>Complete the data to create your own race</p>
+      <p id={s.text}>Complete the data to create your own breed</p>
       <form onSubmit={handleSubmit} id={s.dogForm}>
         <label htmlFor="name">Name:</label>
         <input

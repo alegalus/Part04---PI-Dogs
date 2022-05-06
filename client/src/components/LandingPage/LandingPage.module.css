@@ -27,3 +27,35 @@
   background-color: black;
   background-repeat: no-repeat;
 }
+
+
+@media screen and (min-width: 300px) and (max-width: 399px) {
+  #welcome {
+    right: 90px;
+    top: 40px;
+  }
+
+}
+@media screen and (min-width: 400px) and (max-width: 500px) {
+  #welcome {
+    right: 115px;
+    top: 60px;
+  }
+
+}
+@media screen and (min-width: 700px) and (max-width: 840px) {
+  #welcome {
+    font-size: 2.5em;
+    right: 280px;
+    top: 90px;
+  }
+ 
+}
+@media screen and (min-width: 900px) and (max-width: 1030px) {
+  #welcome {
+    font-size: 3em;
+    right: 370px;
+    top: 100px;
+  }
+}
+

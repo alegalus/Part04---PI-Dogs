@@ -8,6 +8,7 @@ import {
   getAllTemperaments,
   filterByTemp,
   filterByOrigin,
+  clearAllDogs,
 } from "../../actions/action";
 import { DogCard } from "./DogCard";
 import { SearchBar } from "../SearchBar/SearchBar";
@@ -32,6 +33,12 @@ export function Home() {
   useEffect(() => {
     dispatch(getAllDogs());
     dispatch(getAllTemperaments())
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearAllDogs());
+    };
   }, []);
 
   let indexLastDog = currentPage * dogsPerPage;

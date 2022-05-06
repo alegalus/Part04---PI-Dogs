@@ -10,6 +10,8 @@ import {
   FILTER_BY_ORIGIN,
   CREATE_DOG,
   DELETE_DOG,
+  UPDATE_DOG,
+  CLEAR_ALL_DOG,
 } from "../actions/action";
 
 const initialState = {
@@ -24,15 +26,15 @@ function rootReducer(state = initialState, action) {
     case GET_ALL_DOGS: {
       return { ...state, allDogs: action.payload , dogs: action.payload};
     }
-
-    case SEARCH_DOG: {
-      return { ...state, allDogs: action.payload };
+    case CLEAR_ALL_DOG: {
+      return { ...state, allDogs: [] };
     }
-
     case GET_DOG_DETAIL: {
       return { ...state, dogDetail: action.payload };
     }
-
+    case SEARCH_DOG: {
+      return { ...state, allDogs: action.payload };
+    }
     case CLEAR_DETAIL: {
       return { ...state, dogDetail: {} };
     }
@@ -99,6 +101,9 @@ function rootReducer(state = initialState, action) {
     }
     case DELETE_DOG: {
       return { ...state};
+    }
+    case UPDATE_DOG: {
+      return {...state}
     }
 
     default:

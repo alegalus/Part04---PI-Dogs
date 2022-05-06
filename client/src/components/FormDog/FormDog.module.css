@@ -19,6 +19,7 @@
   margin: auto;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 #dogForm input:focus {
@@ -93,4 +94,71 @@
   font-weight: 700;
   color: white;
   background: #001219;
+}
+
+@media screen and (min-width: 300px) and (max-width: 399px) {
+  #dogForm {
+    width: 100%;
+  }
+
+  #dogForm input {
+    width: 70%;
+  }
+
+  #dogForm select {
+    width: 70%;
+  }
+  #dogForm label {
+    margin: 1.5em 0em 0em 4em;
+  }
+}
+@media screen and (min-width: 400px) and (max-width: 500px) {
+  #dogForm {
+    width: 100%;
+  }
+
+  #dogForm input {
+    width: 70%;
+  }
+
+  #dogForm select {
+    width: 70%;
+  }
+  #dogForm label {
+    margin: 1.5em 0em 0em 4em;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 840px) {
+  #dogForm {
+    width: 80%;
+  }
+
+  #dogForm input {
+    width: 70%;
+  }
+
+  #dogForm select {
+    width: 70%;
+  }
+
+  #dogForm label {
+    margin: 1em 0em 0em 7em;
+  }
+}
+@media screen and (min-width: 900px) and (max-width: 1030px) {
+  #dogForm {
+    width: 60%;
+  }
+
+  #dogForm input {
+    width: 70%;
+  }
+
+  #dogForm select {
+    width: 70%;
+  }
+
+  #dogForm label {
+    margin: 1em 0em 0em 7em;
+  }
 }
