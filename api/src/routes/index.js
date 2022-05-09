@@ -1,79 +1,14 @@
 const { Router } = require("express");
-require("dotenv").config();
 const { Dog, Temperament } = require("../db");
-const axios = require("axios").default;
-const { YOUR_API_KEY } = process.env;
+const {getAllData, getTemperaments} = require("./data.js")
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 const router = Router();
-console.log(YOUR_API_KEY);
-//get data from API//
-let getApiData = async () => {
-  let apiData = await axios.get(
-    `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`
-  );
 
-  let apiDog = apiData.data.map((el) => {
-    let temperaments = el.temperament?.toString().split(",");
-    let tempObj = [];
-    temperaments?.map((el) => {
-      tempObj.push({ name: el.trim() });
-    });
-
-    return {
-      id: el.id,
-      name: el.name,
-      weight: el.weight.metric.includes("NaN")
-        ? "20 kg"
-        : el.weight.metric + " kg",
-      height: el.height.metric + " cm",
-      life_span: el.life_span,
-      temperaments: tempObj,
-      image: el.image.url,
-      apiDog: true,
-      dogDbCreated: false,
-    };
-  });
-
-  return apiDog;
-};
-
-let getTemperaments = async () => {
-  let apiDogs = await axios.get(
-    `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`
-  );
-  let temp = apiDogs.data.map((el) => el.temperament);
-  let tempArr = temp.toString().split(",");
-  let set = new Set(tempArr);
-  let arrFinal = Array.from(set);
-  return arrFinal;
-};
-
-//get data from DB //
-let getDbData = async () => {
-  return await Dog.findAll({
-    include: {
-      model: Temperament,
-      attributes: ["name"],
-      through: {
-        attributes: [],
-      },
-    },
-  });
-};
-
-//get all the information (API and DB)//
-let getAllData = async () => {
-  let apiData = await getApiData();
-  let dbData = await getDbData();
-  let allData = [...apiData, ...dbData];
-  return allData;
-};
 //Routes//
-
 router.get("/dogs", async (req, res) => {
   let { name } = req.query;
   let data = await getAllData();
@@ -102,16 +37,7 @@ router.get("/dogs/:idRaza", async (req, res) => {
 });
 
 router.get("/temperament", async (req, res) => {
-  let arrTemp = await getTemperaments();
-
-  arrTemp.forEach((el) => {
-    let t = el.trim();
-    Temperament.findOrCreate({
-      where: { name: t },
-    });
-  });
-
-  const allTemp = await Temperament.findAll();
+  let allTemp = await getTemperaments();
   res.send(allTemp);
 });
 
@@ -133,16 +59,12 @@ router.post("/dog", async (req, res) => {
     }
 
     let arrHeight = [];
-    let minH = minHeight;
-    let maxH = maxHeight;
-    arrHeight.push(minH, maxH);
+    arrHeight.push(minHeight, maxHeight);
     let strH = arrHeight.join(" - ");
     let strHeight = strH + " cm";
 
     let arrWeight = [];
-    let minW = minWeight;
-    let maxW = maxWeight;
-    arrWeight.push(minW, maxW);
+    arrWeight.push(minWeight, maxWeight);
     let strW = arrWeight.join(" - ");
     let strWeight = strW + " kg";
 
@@ -160,7 +82,7 @@ router.post("/dog", async (req, res) => {
       where: { name: temperament },
     });
 
-    dogCreated.addTemperament(ListTemperaments);
+     await dogCreated.addTemperaments(ListTemperaments);
 
     res.status(201).send("dog created successfully");
   } catch (error) {
@@ -198,7 +120,7 @@ router.put("/dogs/:idRaza", async (req, res) => {
     updateDog.height = strHeight;
     updateDog.weight = strWeight;
     updateDog.life_span = life_span + " years";
-
+    
     await updateDog.save();
 
     res.status(200).send("dog updated successfully");

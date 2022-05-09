@@ -51,6 +51,7 @@ export function DogDetail() {
       life_span: detail.life_span.substring(0, 7).trim(),
     });
   };
+  
   let handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateDog(id, input));

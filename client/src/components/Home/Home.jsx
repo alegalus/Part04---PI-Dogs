@@ -21,18 +21,10 @@ export function Home() {
   let dispatch = useDispatch();
   let dogs = useSelector((state) => state.allDogs);
   let temp = useSelector((state) => state.allTemperaments);
-  let [currentPage, setCurrentPage] = useState(1);
-  let [dogsPerPage /*setDogsPerPage*/] = useState(8);
-
-
-  const [, /*order*/ setOrder] = useState("");
-  const [, /*weight*/ setWeight] = useState("");
-  const [, /*temp*/ setTemp] = useState("");
-  const [, /*origin*/ setOrigin] = useState("");
 
   useEffect(() => {
     dispatch(getAllDogs());
-    dispatch(getAllTemperaments())
+    dispatch(getAllTemperaments());
   }, []);
 
   useEffect(() => {
@@ -41,6 +33,10 @@ export function Home() {
     };
   }, []);
 
+  //Paginate
+  let [currentPage, setCurrentPage] = useState(1);
+  let [dogsPerPage /*setDogsPerPage*/] = useState(8);
+
   let indexLastDog = currentPage * dogsPerPage;
   let indexFirstDog = indexLastDog - dogsPerPage;
   let currentDog = dogs.slice(indexFirstDog, indexLastDog);
@@ -48,10 +44,18 @@ export function Home() {
   let paginate = (pageNumbers) => {
     setCurrentPage(pageNumbers);
   };
-
+  
+  //Reaload
   function reloadSubmit() {
     dispatch(getAllDogs());
   }
+
+  //Filters
+
+  const [, /*order*/ setOrder] = useState("");
+  const [, /*weight*/ setWeight] = useState("");
+  const [, /*temp*/ setTemp] = useState("");
+  const [, /*origin*/ setOrigin] = useState("");
 
   function handleOrderByName(e) {
     dispatch(orderByName(e.target.value));
@@ -127,12 +131,11 @@ export function Home() {
         </form>
       </div>
       <div id={s.dogCardPos}>
-        {
-        dogs.length === 0 ? (
+        {dogs.length === 0 ? (
           <div id={s.notFound}>
-          <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas" ></img>
-          <h3>Dogs not found</h3>
-          <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas" ></img>
+            <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas"></img>
+            <h3>Dogs not found</h3>
+            <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas"></img>
           </div>
         ) : (
           currentDog.map((dog) => (

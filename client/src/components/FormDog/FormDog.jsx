@@ -84,7 +84,8 @@ export function FormDog() {
   let handleSelect = (e) => {
     setInput({
       ...input,
-      temperament: [...input.temperament, e.target.value],
+      temperament: input.temperament.concat(e.target.value),
+      // [...input.temperament, e.target.value]
     });
   };
 
@@ -134,7 +135,7 @@ export function FormDog() {
           autoComplete="off"
           onChange={handleInputChange}
           value={input.minHeight}
-          type="number"
+          type="text"
           name="minHeight"
           id=""
         />
@@ -147,7 +148,7 @@ export function FormDog() {
           autoComplete="off"
           onChange={handleInputChange}
           value={input.maxHeight}
-          type="number"
+          type="text"
           name="maxHeight"
           id=""
         />
