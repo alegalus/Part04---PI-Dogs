@@ -10,7 +10,7 @@ export function SearchBar() {
   function handleChange(e) {
     setSearch(e.target.value);
   }
-
+//diparo la action de search con el valor del input que me va a conectar con el back y me va a modificar el state del reducer
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(searchDog(search));

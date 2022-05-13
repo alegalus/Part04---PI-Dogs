@@ -21,7 +21,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-
+//conexion con las rutas
 server.use('/', routes);
 
 // Error catching endware.

@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   getAllDogs,
+  getAllTemperaments,
   orderByName,
   orderByWeight,
-  getAllTemperaments,
   filterByTemp,
   filterByOrigin,
   clearAllDogs,
@@ -21,10 +21,16 @@ export function Home() {
   let dispatch = useDispatch();
   let dogs = useSelector((state) => state.allDogs);
   let temp = useSelector((state) => state.allTemperaments);
-
+  //definimos este state para que me muestre el cargando
+  let [loading, setLoading] = useState(false);
+//prirmero pongo aca los datos a traer con el dispatch pero lo hago asincorono y cambio a 
+//true el setloading, para que me deje de mostrar el cargando
+  async function data() {
+    await Promise.all([dispatch(getAllDogs()), dispatch(getAllTemperaments())]);
+    setLoading(true);
+  }
   useEffect(() => {
-    dispatch(getAllDogs());
-    dispatch(getAllTemperaments());
+    data();
   }, []);
 
   useEffect(() => {
@@ -34,47 +40,53 @@ export function Home() {
   }, []);
 
   //Paginate
+  //defino la cantidad de ccards dog por pagina y definicmos el estado de currentpage para saber en que pagina vamos a estar
   let [currentPage, setCurrentPage] = useState(1);
-  let [dogsPerPage /*setDogsPerPage*/] = useState(8);
+  let [dogsPerPage, setDogsPerPage] = useState(8);
 
+//aca definimos el principio el fin de cada pagina
   let indexLastDog = currentPage * dogsPerPage;
   let indexFirstDog = indexLastDog - dogsPerPage;
+  //en current dog armo un nuevo array con los perros de cada pagina y ese es el que voy a recorrer con las dogs card
   let currentDog = dogs.slice(indexFirstDog, indexLastDog);
-
+//esta funcion es la que paso para que sepa en que pagina esta y muestre los perros que corresponden
   let paginate = (pageNumbers) => {
     setCurrentPage(pageNumbers);
   };
-  
+
   //Reaload
   function reloadSubmit() {
     dispatch(getAllDogs());
   }
 
-  //Filters
-
-  const [, /*order*/ setOrder] = useState("");
-  const [, /*weight*/ setWeight] = useState("");
-  const [, /*temp*/ setTemp] = useState("");
-  const [, /*origin*/ setOrigin] = useState("");
-
+  //Ordenamiento y filtrado
+  //este estado es solo para renderizar los cambios, solo uso el set order
+  const [order, setOrder] = useState("");
+//en los ordenamiento y en flitrado siempre uso el e.target.value y no el orden, eso tiene que ver por que usamos un select comun
+//react tiene un elemento especial para esto que funciona mejor
   function handleOrderByName(e) {
+    //aca disparo el ordenamiento
     dispatch(orderByName(e.target.value));
+    //y aca uso el estado para renderizar
     setOrder(e.target.value);
+   
   }
-
   let handleOrderByWeight = (e) => {
     dispatch(orderByWeight(e.target.value));
-    setWeight(e.target.value);
+    setOrder(e.target.value);
   };
-
+//en los filtros es igual al ordenamiento, solo que tengo que definir el currentpage en 1 paara que seimpre sea la pagina
+//uno la primera ya que al filtrar pueden ser menos perros
   let handleFilterByTemp = (e) => {
     dispatch(filterByTemp(e.target.value));
-    setTemp(e.target.value);
+    setOrder(e.target.value);
+    setCurrentPage(1)
   };
 
   let handleFilterByOrigin = (e) => {
     dispatch(filterByOrigin(e.target.value));
-    setOrigin(e.target.value);
+    setOrder(e.target.value);
+    setCurrentPage(1)
   };
 
   return (
@@ -131,37 +143,53 @@ export function Home() {
         </form>
       </div>
       <div id={s.dogCardPos}>
-        {dogs.length === 0 ? (
-          <div id={s.notFound}>
-            <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas"></img>
-            <h3>Dogs not found</h3>
-            <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas"></img>
-          </div>
+
+        {//si esta en loading mustra todo los datos, si no tiene lenght el dog me mustra que no encontro ningun perro
+        //todo cvon renderizado condicional
+        loading ? (
+          dogs.length ? (
+            currentDog.map((dog) => (
+              <DogCard
+                id={dog.id}
+                key={dog.id}
+                image={dog.image}
+                name={dog.name}
+                temperaments={dog.temperaments}
+                weight={dog.weight}
+              />
+            ))
+          ) : (
+            <div id={s.notFound}>
+              <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas"></img>
+              <h3>Dogs not found</h3>
+              <img src="https://i.ibb.co/zJwvbYf/3734.png" alt="huellas"></img>
+            </div>
+          )
         ) : (
-          currentDog.map((dog) => (
-            <DogCard
-              id={dog.id}
-              key={dog.id}
-              image={dog.image}
-              name={dog.name}
-              temperaments={dog.temperaments}
-              weight={dog.weight}
-            />
-          ))
+          <div>
+            <h2>Cargando....</h2>
+          </div>
         )}
       </div>
-      <div id={s.pagination}>
-        <Pagination
-          dogsPerPage={dogsPerPage}
-          totalDogs={dogs.length}
-          paginate={paginate}
-        />
-      </div>
-      {dogs.length === 0 ? null : (
-        <div>
-          <Footer />
-        </div>
-      )}
+      {loading ? (
+        dogs.length ? (
+          <div id={s.pagination}>
+            <Pagination
+              dogsPerPage={dogsPerPage}
+              totalDogs={dogs.length}
+              paginate={paginate}
+            />
+          </div>
+        ) : null
+      ) : null}
+
+      {loading ? (
+        dogs.length ? (
+          <div>
+            <Footer />
+          </div>
+        ) : null
+      ) : null}
     </div>
   );
 }

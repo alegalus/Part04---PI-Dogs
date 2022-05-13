@@ -7,6 +7,7 @@ import { FormDog } from "./components/FormDog/FormDog";
 
 function App() {
   return (
+    //armamos el router de cada componente con distinta url
     <div>
       <Switch>
         <Route exact path="/">

@@ -44,7 +44,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Dog, Temperament } = sequelize.models;
 
-// Aca vendrian las relaciones
+// Aca vendrian las relaciones, es muchos a muchos en este caso y creamos la tabla intermedia "dogTemperament"
 // Product.hasMany(Reviews);
 Dog.belongsToMany(Temperament, {through: 'dogTemperament'})
 Temperament.belongsToMany(Dog, {through: 'dogTemperament'})

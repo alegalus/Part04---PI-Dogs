@@ -9,6 +9,8 @@ import {Provider} from "react-redux"
 import store from './store/store';
 
 ReactDOM.render(
+  //aca conectamos el browserRouter a la app para que se rendericen nuestras rutas y conectamos el store 
+  //al provider
   <Provider store = {store}>
     <BrowserRouter>
     <App />

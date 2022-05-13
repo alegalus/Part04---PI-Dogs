@@ -27,8 +27,9 @@ export function FormDog() {
 
   useEffect(() => {
     dispatch(getAllTemperaments()); 
-  }, [dispatch]);
-
+  }, []);
+//en el objeto error voy guardando los errores de acuerdo a si no tiene el input o a si 
+//no cumple con cierto requisito
   function validate(input) {
     let errors = {};
     if (!input.name) {
@@ -67,7 +68,7 @@ export function FormDog() {
 
     return errors;
   }
-
+//aca voy guardando input para poder acceder a los datos con onchange y que vaya generando los errores
   let handleInputChange = (e) => {
     setInput({
       ...input,
@@ -80,7 +81,7 @@ export function FormDog() {
       })
     );
   };
-
+//este handle maneja los select para que los vaya agregando en un arreglo cuando los selecciono
   let handleSelect = (e) => {
     setInput({
       ...input,
@@ -88,14 +89,15 @@ export function FormDog() {
       // [...input.temperament, e.target.value]
     });
   };
-
+//este me hace un filter y me va borrando los que quiero sacar
   let handleDeleteTemp = (el) => {
     setInput({
       ...input,
       temperament: input.temperament?.filter((t) => t !== el),
     });
   };
-
+//envia los datos de formulario enviando el objeto con los datos como payload en el dispatch del post
+//luego limpia los input para seguir cargando un nuevo perro
   let handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createDog(input));
@@ -122,13 +124,16 @@ export function FormDog() {
         <input
           required
           autoComplete="off"
+          //en el onchange pasamos la funcion donde guarda los input
           onChange={handleInputChange}
+          //en value lo conectamos con el valor que necesitanos que guarde
           value={input.name}
           type="text"
           name="name"
           id=""
         />
-        {!errors.name ? null : <p className={s.danger}>{errors.name}</p>}
+        {//abajo vamos mostrando los errores
+        !errors.name ? null : <p className={s.danger}>{errors.name}</p>}
         <label htmlFor="minHeight">Min height:</label>
         <input
           required
@@ -240,7 +245,8 @@ export function FormDog() {
         <Footer />
       </div>
       <div>
-        <Modal state={winModal} handleChangeModal={setWinModal}>
+        {/*mostramos el modal cuando creamos el perro y en el boton de aceptar cambiamos el estado a false para desmontarlo */}
+        <Modal state={winModal} >
           <p>The dog was successfully created</p>
           <h3>You can continue creating breeds of dogs</h3>
           <button onClick={() => setWinModal(false)}>Accept</button>

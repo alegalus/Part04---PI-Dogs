@@ -33,3 +33,10 @@
 .active {
   background-color: #ee9b00;
 }
+
+.nextPrev {
+  border: 1px solid black;
+  margin-left: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}

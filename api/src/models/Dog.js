@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
     "dog",
-    {
+    {//usamos el uuid para que me traiga id aleatorios y no se pise con los de la api
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -28,6 +28,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      //aca agregue esta info para usarla en los filtros de si era de base de datos o de api
       dogDbCreated: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
@@ -41,6 +42,7 @@ module.exports = (sequelize) => {
       },
     },
     {
+      //esto es para eliminar el update y create que trae por defecto el modelo
       timestamps: false,
     }
   );
