@@ -1,3 +1,53 @@
+# Proyecto realizado para el bootcamp de henry
+
+ #### :tv: Tecnologías necesarias:  
+:chart: React
+:chart: Redux
+:chart: Express
+:chart: Sequelize - Postgres
+
+## Objetivos del Proyecto
+
+- Construir una App utlizando React, Redux, Node y Sequelize.
+- Afirmar y conectar los conceptos aprendidos en la carrera.
+- Aprender mejores prácticas.
+- Aprender y practicar el workflow de GIT.
+- Usar y practicar testing.
+
+La idea general es crear una aplicación en la cual se puedan ver distintas razas de perro junto con información relevante de las mismas utilizando la api externa [the dog api](https://thedogapi.com/) y a partir de ella poder, entre otras cosas:
+
+  - Buscar perros
+  - Filtrarlos / Ordenarlos
+  - Agregar nuevos perros y guardarlos en la base de datos
+  - Modificar o eliminar esos perros agregados
+
+# Vistas del proyecto
+
+![Dog App __ Henry 2022 - Google Chrome 14_5_2022 16_29_32](https://user-images.githubusercontent.com/68312629/168445851-db9a2581-254a-4347-9140-f10dd63b72de.png)
+*(landing Page)*
+
+![Dog App __ Henry 2022 - Google Chrome 14_5_2022 16_29_42](https://user-images.githubusercontent.com/68312629/168445858-339f357f-84f6-48db-afae-75855fe5baf1.png)
+*(loading Page)*
+
+![Dog App __ Henry 2022 - Google Chrome 14_5_2022 16_29_45](https://user-images.githubusercontent.com/68312629/168445874-260a9439-81c9-409b-9d77-66f2436f60b8.png)
+*(Dogs Page I)*
+
+![Dog App __ Henry 2022 - Google Chrome 14_5_2022 16_29_58](https://user-images.githubusercontent.com/68312629/168445882-ba25bcfb-0076-401d-b778-80af2f00f371.png)
+*(Dogs Page II)*
+
+![Dog App __ Henry 2022 - Google Chrome 14_5_2022 16_37_07](https://user-images.githubusercontent.com/68312629/168446013-f077e279-9f74-4947-a2f7-947fb67bd341.png)
+*(Dogs not found Page)*
+
+![Dog App __ Henry 2022 - Google Chrome 14_5_2022 16_30_36](https://user-images.githubusercontent.com/68312629/168445901-79917288-1456-4f66-97ac-0819267299d8.png)
+*(Form Page)*
+
+![Dog App __ Henry 2022 - Google Chrome 14_5_2022 16_31_00](https://user-images.githubusercontent.com/68312629/168445903-51565c9f-11f5-4525-8bc8-35a6196f23f8.png)
+*(Detail Page)*
+
+![Dog App __ Henry 2022 - Google Chrome 14_5_2022 16_31_09](https://user-images.githubusercontent.com/68312629/168445909-7092a075-dbf5-4ff8-9ec4-4b90269f800a.png)
+*(Delete Dog)*
+
+# Requisitos del proyecto
 <p align='left'>
     <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
 </p>
