@@ -20,7 +20,7 @@
 }
 
 #pageNum li:hover {
-  background-color: #ca6702;
+  background-color: rgb(195, 195, 195);
 }
 
 #pageLi a {
@@ -31,7 +31,7 @@
 }
 
 .active {
-  background-color: #ee9b00;
+  background-color: rgb(140, 140, 140);
 }
 
 .nextPrev {

@@ -166,8 +166,10 @@ export function Home() {
             </div>
           )
         ) : (
-          <div>
-            <h2>Cargando....</h2>
+          <div className={s.loader}>
+            <div className={s.ball}></div>
+            <div className={s.ball}></div>
+            <div className={s.ball}></div>
           </div>
         )}
       </div>

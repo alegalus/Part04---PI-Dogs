@@ -34,7 +34,7 @@ export function Pagination(props) {
         />
 
         {/*recorro ese arreglo que arme y lo mistro en pantalla y le paso el onclick para ir a cada pagina */}
-        {screen > 1200 &&
+        {screen > 1400 &&
           pageNumbers.map((num) => (
             <li
               id={s.pageLi}
@@ -54,6 +54,7 @@ export function Pagination(props) {
           type="button"
           value="next"
         />
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis voluptatibus similique, debitis nam voluptas, accusamus atque odit esse at excepturi, commodi obcaecati! Mollitia sunt dolorum et earum velit iure nobis.</p>
       </ul>
     </nav>
   );

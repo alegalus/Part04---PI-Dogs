@@ -53,8 +53,8 @@ export function DogDetail() {
     setInput({
       name: detail.name,
       //guardo los datos del string segun corresponda en min o max
-      minHeight: detail.weight.substring(0, 2).trim(),
-      maxHeight: detail.weight.substring(5, 7).trim(),
+      minHeight: detail.height.substring(0, 2).trim(),
+      maxHeight: detail.height.substring(5, 7).trim(),
       minWeight: detail.weight.substring(0, 2).trim(),
       maxWeight: detail.weight.substring(5, 7).trim(),
       life_span: detail.life_span.substring(0, 7).trim(),
