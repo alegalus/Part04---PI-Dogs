@@ -54,7 +54,6 @@ export function Pagination(props) {
           type="button"
           value="next"
         />
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis voluptatibus similique, debitis nam voluptas, accusamus atque odit esse at excepturi, commodi obcaecati! Mollitia sunt dolorum et earum velit iure nobis.</p>
       </ul>
     </nav>
   );
