@@ -10,6 +10,7 @@ let getApiData = async () => {
   //llamamos con un get a la api
   let apiData = await axios.get(
     `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`
+    // `https://api.thedogapi.com/v1/breeds`
   );
   //armamos el objeto de lo que queremos de la api, recorriendo con un map los datos de la api
   let apiDog = apiData.data.map((el) => {
